@@ -1,9 +1,7 @@
 package com.fudn.customerservice.service;
 
-import com.fudn.customerservice.dto.ChangePasswordRequest;
-import com.fudn.customerservice.dto.CustomerResponse;
-import com.fudn.customerservice.dto.ProfileUpdateRequest;
-import com.fudn.customerservice.dto.RegisterRequest;
+
+import com.fudn.customerservice.dto.*;
 import com.fudn.customerservice.exception.ApiException;
 import com.fudn.customerservice.model.Customer;
 import com.fudn.customerservice.model.CustomerStatus;
@@ -11,9 +9,12 @@ import com.fudn.customerservice.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -27,6 +28,9 @@ public class CustomerService {
     @Value("${app.admin.email}")
     private String adminEmail;
 
+    // ===================== CUSTOMER (F2) =====================
+
+    // TODO 2.4
     @Transactional
     public CustomerResponse register(RegisterRequest request) {
         ensureEmailAvailable(request.email(), null);
@@ -42,6 +46,7 @@ public class CustomerService {
         return CustomerResponse.from(saved);
     }
 
+    // TODO 2.5
     public CustomerResponse getProfile(Long customerId) {
         return CustomerResponse.from(findCustomer(customerId));
     }
@@ -68,11 +73,60 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
+    // ===================== ADMIN (F3) =====================
+
+    // TODO 3.2
+    public List<CustomerResponse> search(String keyword) {
+        List<Customer> customers = (keyword == null || keyword.isBlank())
+                ? customerRepository.findAll(Sort.by("customerId"))
+                : customerRepository.findByCustomerNameContainingIgnoreCaseOrEmailContainingIgnoreCaseOrderByCustomerIdAsc(
+                        keyword.trim(), keyword.trim());
+        return customers.stream().map(CustomerResponse::from).toList();
+    }
+
+    public CustomerResponse getById(Long id) {
+        return CustomerResponse.from(findCustomer(id));
+    }
+
+    @Transactional
+    public CustomerResponse create(AdminCustomerRequest request) {
+        if (request.password() == null || request.password().isBlank()) {
+            throw ApiException.badRequest("password: Password is required when creating a customer");
+        }
+        ensureEmailAvailable(request.email(), null);
+        Customer customer = new Customer();
+        applyAdminRequest(customer, request);
+        customer.setPassword(passwordEncoder.encode(request.password()));
+        return CustomerResponse.from(customerRepository.save(customer));
+    }
+
+    @Transactional
+    public CustomerResponse update(Long id, AdminCustomerRequest request) {
+        Customer customer = findCustomer(id);
+        ensureEmailAvailable(request.email(), id);
+        applyAdminRequest(customer, request);
+        if (request.password() != null && !request.password().isBlank()) {
+            customer.setPassword(passwordEncoder.encode(request.password()));
+        }
+        return CustomerResponse.from(customerRepository.save(customer));
+    }
+
+    /** Xoa mem: chuyen INACTIVE de giu lich su booking (booking-service van tham chieu customerId). */
+    @Transactional
+    public void delete(Long id) {
+        Customer customer = findCustomer(id);
+        customer.setCustomerStatus(CustomerStatus.INACTIVE);
+        customerRepository.save(customer);
+    }
+
+    // ===================== HELPER =====================
+
     private Customer findCustomer(Long id) {
         return customerRepository.findById(id)
                 .orElseThrow(() -> ApiException.notFound("Customer not found with id: " + id));
     }
 
+    /** BR01: email duy nhat va khong trung email Admin. excludeId != null khi update. */
     private void ensureEmailAvailable(String email, Long excludeId) {
         boolean exists = excludeId == null
                 ? customerRepository.existsByEmailIgnoreCase(email)
@@ -80,5 +134,13 @@ public class CustomerService {
         if (exists || adminEmail.equalsIgnoreCase(email)) {
             throw ApiException.conflict("Email is already in use: " + email);
         }
+    }
+
+    private void applyAdminRequest(Customer customer, AdminCustomerRequest request) {
+        customer.setCustomerName(request.customerName());
+        customer.setTelephone(request.telephone());
+        customer.setEmail(request.email());
+        customer.setCustomerBirthday(request.customerBirthday());
+        customer.setCustomerStatus(request.customerStatus());
     }
 }
