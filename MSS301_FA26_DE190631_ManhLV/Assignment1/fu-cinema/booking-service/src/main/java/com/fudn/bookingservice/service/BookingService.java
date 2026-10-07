@@ -4,6 +4,8 @@ import com.fudn.bookingservice.client.MovieClient;
 import com.fudn.bookingservice.dto.BookingItemRequest;
 import com.fudn.bookingservice.dto.BookingResponse;
 import com.fudn.bookingservice.dto.CreateBookingRequest;
+import com.fudn.bookingservice.dto.MovieRevenueResponse;
+import com.fudn.bookingservice.dto.ReportResponse;
 import com.fudn.bookingservice.dto.SeatMapResponse;
 import com.fudn.bookingservice.dto.ShowtimeResponse;
 import com.fudn.bookingservice.exception.ApiException;
@@ -20,12 +22,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -86,8 +90,42 @@ public class BookingService {
                         + CANCEL_BEFORE_HOURS + " hours before the showtime");
             }
         }
+
         booking.setBookingStatus(BookingStatus.CANCELLED);
         return BookingResponse.from(bookingRepository.save(booking));
+    }
+
+    public ReportResponse report(LocalDate startDate, LocalDate endDate) {
+        if (startDate.isAfter(endDate)) {
+            throw ApiException.badRequest("startDate must be before or equal to endDate");
+        }
+
+        List<Booking> bookings = bookingRepository.findForReport(BookingStatus.CONFIRMED,
+                startDate.atStartOfDay(), endDate.plusDays(1).atStartOfDay());
+
+        BigDecimal totalRevenue = BigDecimal.ZERO;
+        long totalTickets = 0;
+        Map<String, MovieRevenueResponse> revenueByMovie = new HashMap<>();
+
+        for (Booking booking : bookings) {
+            totalRevenue = totalRevenue.add(booking.getTotalPrice());
+            totalTickets += booking.getDetails().size();
+            for (BookingDetail detail : booking.getDetails()) {
+                revenueByMovie.merge(detail.getMovieId(),
+                        new MovieRevenueResponse(detail.getMovieId(), detail.getMovieTitle(), 1, detail.getPrice()),
+                        (current, added) -> new MovieRevenueResponse(current.movieId(), current.movieTitle(),
+                                current.ticketsSold() + added.ticketsSold(),
+                                current.revenue().add(added.revenue())));
+            }
+        }
+
+        List<MovieRevenueResponse> sortedRevenueByMovie = revenueByMovie.values().stream()
+                .sorted(Comparator.comparing(MovieRevenueResponse::revenue).reversed()
+                        .thenComparing(Comparator.comparingLong(MovieRevenueResponse::ticketsSold).reversed()))
+                .toList();
+
+        return new ReportResponse(startDate, endDate, bookings.size(), totalTickets, totalRevenue,
+                sortedRevenueByMovie, bookings.stream().map(BookingResponse::from).toList());
     }
 
     @Transactional
@@ -105,20 +143,19 @@ public class BookingService {
         for (BookingItemRequest item : request.items()) {
             String seat = item.seatCode();
             if (!requestedSeats.add(item.showtimeId() + "#" + seat)) {
-                throw ApiException.badRequest("Duplicate seat " + seat + " of showtime "
-                        + item.showtimeId() + " in request");
+                throw ApiException.badRequest(
+                        "Duplicate seat " + seat + " of showtime " + item.showtimeId() + " in request");
             }
 
             ShowtimeResponse showtime = showtimeCache.computeIfAbsent(item.showtimeId(), this::fetchShowtime);
             validateShowtime(showtime);
             validateSeat(seat, showtime);
 
-            Set<String> taken = bookedSeatCache.computeIfAbsent(showtime.showtimeId(),
-                    id -> new HashSet<>(bookingDetailRepository
-                            .findSeatCodesByShowtime(id, BookingStatus.CONFIRMED)));
-            if (taken.contains(seat)) {
-                throw ApiException.conflict("Seat " + seat + " of showtime "
-                        + showtime.showtimeId() + " is already booked");
+            Set<String> bookedSeats = bookedSeatCache.computeIfAbsent(showtime.showtimeId(),
+                    id -> new HashSet<>(bookingDetailRepository.findSeatCodesByShowtime(id, BookingStatus.CONFIRMED)));
+            if (bookedSeats.contains(seat)) {
+                throw ApiException.conflict(
+                        "Seat " + seat + " of showtime " + showtime.showtimeId() + " is already booked");
             }
 
             BookingDetail detail = new BookingDetail();
@@ -152,15 +189,6 @@ public class BookingService {
         }
     }
 
-    private Booking findAccessible(Long bookingId, Long userId, String role) {
-        Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() -> ApiException.notFound("Booking not found with id: " + bookingId));
-        if (!ROLE_ADMIN.equals(role) && !booking.getCustomerId().equals(userId)) {
-            throw ApiException.forbidden("You can only access your own bookings");
-        }
-        return booking;
-    }
-
     private void validateShowtime(ShowtimeResponse showtime) {
         if (!"SCHEDULED".equals(showtime.showtimeStatus())) {
             throw ApiException.badRequest("Showtime " + showtime.showtimeId()
@@ -172,6 +200,10 @@ public class BookingService {
     }
 
     private void validateSeat(String seat, ShowtimeResponse showtime) {
+        if (seat == null || !seat.matches("^[A-Z][1-9][0-9]?$")) {
+            throw ApiException.badRequest("Invalid seat code: " + seat);
+        }
+
         int rowIndex = seat.charAt(0) - 'A';
         int number = Integer.parseInt(seat.substring(1));
         if (rowIndex >= showtime.seatRows() || number > showtime.seatsPerRow()) {
@@ -179,5 +211,14 @@ public class BookingService {
             throw ApiException.badRequest("Seat " + seat + " does not exist in room " + showtime.roomName()
                     + " (rows A-" + lastRow + ", seats 1-" + showtime.seatsPerRow() + ")");
         }
+    }
+
+    private Booking findAccessible(Long bookingId, Long userId, String role) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> ApiException.notFound("Booking not found with id: " + bookingId));
+        if (!ROLE_ADMIN.equals(role) && !booking.getCustomerId().equals(userId)) {
+            throw ApiException.forbidden("You can only access your own bookings");
+        }
+        return booking;
     }
 }
