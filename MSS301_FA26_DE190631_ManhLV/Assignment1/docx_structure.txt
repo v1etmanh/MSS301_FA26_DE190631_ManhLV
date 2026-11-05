@@ -1,0 +1,207 @@
+Total media files in docx: 64
+P0:  Assignment 1 MSS301 – Cinema Ticket Booking System using API Gateway
+P1:  Created by: traltb@fe.edu.vn
+P2:  Link github:
+P3:  https://github.com/ducsucute2005/MSS301_FA26_DE190685_SuLD.git
+P4:  Mục lục
+P5:  F0 – Hạ tầng và khởi tạo project3
+P6:  1.1.TODO 0.1 Tạo thư mục gốc3
+P7:  1.2.TODO 0.2 mysql/init.sql tạo 3 database cinema_customer, cinema_movie, cinema_booking3
+P8:  1.3.TODO 0.34
+P9:  1.4.TODO 0.45
+P10:  1.5.TODO 0.56
+P11:  1.6.TODO 0.67
+P12:  1.7.TODO 1.17
+P13:  1.8.TODO 1.28
+P14:  1.9.TODO 1.310
+P15:  1.10.TODO 1.411
+P16:  1.11.TODO 1.511
+P17:  2.0.F2 – Customer: register & profile (nhánh `feature/f2-customer-profile`)13
+P18:  2.1.TODO 2.113
+P19:  2.2.TODO 2.214
+P20:  2.3.TODO 2.315
+P21:  2.4.TODO 2.416
+P22:  2.5.TODO 2.517
+P23:  2.6.TODO 2.617
+P24:  3.0.F3 – Admin: manage customers (nhánh `feature/f3-admin-customers`)18
+P25:  3.1.TODO 3.118
+P26:  3.2.TODO 3.219
+P27:  3.3.TODO 3.319
+P28:  4.0.F4 – Genre & Room (nhánh `feature/f4-genre-room`)20
+P29:  4.1.TODO 4.120
+P30:  4.2.TODO 4.221
+P31:  4.3.TODO 4.322
+P32:  4.4.TODO 4.422
+P33:  5.0.F5 – Movie (nhánh `feature/f5-movies`)24
+P34:  5.1.TODO 5.124
+P35:  5.2.TODO 5.224
+P36:  5.3.TODO 5.325
+P37:  5.4.TODO 5.426
+P38:  6.0.F6 – Showtime (nhánh `feature/f6-showtimes`)26
+P39:  6.1.TODO 6.126
+P40:  6.2.TODO 6.227
+P41:  6.3.TODO 6.328
+P42:  6.4.TODO 6.429
+P43:  6.5.TODO 6.529
+P44:  7.0.F7 – Create booking (nhánh `feature/f7-create-booking`)30
+P45:  7.1.TODO 7.130
+P46:  7.2.TODO 7.231
+P47:  7.3.TODO 7.332
+P48:  7.4.TODO 7.433
+P49:  7.5.TODO 7.534
+P50:  7.6.TODO 7.635
+P51:  7.7.TODO 7.736
+P52:  8.0.F8 – History & cancel (nhánh `feature/f8-history-cancel`)37
+P53:  8.1.TODO 8.137
+P54:  8.2.TODO 8.238
+P55:  8.3.TODO 8.338
+P56:  8.4.TODO 8.439
+P57:  9.0.F8 – History & cancel (nhánh `feature/f8-history-cancel`)40
+P58:  9.1.TODO 9.140
+P59:  9.2.TODO 9.241
+P60:  9.3.TODO 9.341
+P61:  10.0.F10 – API Gateway (nhánh `feature/f10-gateway`)42
+P62:  10.1.TODO 10.142
+P63:  10.2.TODO 10.243
+P64:  10.3.TODO 10.344
+P65:  10.4.TODO 10.445
+P66:  11.0.F11 – Postman & nộp bài (nhánh `feature/f11-postman`)45
+P67:  11.1.TODO 11.145
+P68:  11.2.TODO 11.246
+P69:  11.3.TODO 11.346
+P73:  F0 – Hạ tầng và khởi tạo project
+P74:  TODO 0.1 Tạo thư mục gốc
+P75:  Chụp hình kết quả: cấu trúc project/ kết quả chạy / output terminal
+P76:  Commit: chore(infra): add docker compose for sql server, mongodb and mysql`
+P77:  (Coi ở mục 9.4 Bảng commit trong file Assignment1_Guide.md)
+P78: [Has 1 images] 
+P80: [Has 1 images] 
+P82:  TODO 0.2 mysql/init.sql tạo 3 database cinema_customer, cinema_movie, cinema_booking
+P83:  Chụp hình kết quả: cấu trúc project/ kết quả chạy / output terminal
+P84:  Commit: chore(infra): add docker compose for sql server, mongodb and mysql`
+P85:  (Coi ở mục 9.4 Bảng commit trong file Assignment1_Guide.md)
+P86: [Has 1 images] 
+P88: [Has 1 images] 
+P89:  TODO 0.3
+P91: [Has 1 images] 
+P92: [Has 1 images] 
+P93:  TODO 0.4
+P94: [Has 1 images] 
+P96:  TODO 0.5
+P97: [Has 1 images] 
+P98: [Has 1 images] 
+P100:  TODO 0.6
+P101: [Has 1 images] 
+P103: [Has 1 images] 
+P104:  TODO 1.1
+P105: [Has 1 images] 
+P107:  TODO 1.2
+P108: [Has 1 images] 
+P109: [Has 1 images] 
+P112:  TODO 1.3
+P113: [Has 1 images] 
+P115: [Has 1 images] 
+P118:  TODO 1.4
+P119: [Has 1 images] 
+P121: [Has 1 images] 
+P122:  TODO 1.5
+P123: [Has 1 images] 
+P126:  Mỗi mục sẽ gồm kết quả chạy, commit message
+P127:  F2 – Customer: register & profile (nhánh `feature/f2-customer-profile`)
+P128:  TODO 2.1
+P129: [Has 1 images] 
+P131:  TODO 2.2
+P132: [Has 1 images] 
+P136:  TODO 2.3
+P137: [Has 1 images] 
+P140:  TODO 2.4
+P141: [Has 1 images] 
+P143:  TODO 2.5
+P144: [Has 1 images] 
+P146:  TODO 2.6
+P147: [Has 1 images] 
+P152:  F3 – Admin: manage customers (nhánh `feature/f3-admin-customers`)
+P153:  TODO 3.1
+P154: [Has 1 images] 
+P156:  TODO 3.2
+P157: [Has 1 images] 
+P158:  TODO 3.3
+P159: [Has 1 images] 
+P164:  F4 – Genre & Room (nhánh `feature/f4-genre-room`)
+P165:  TODO 4.1
+P166: [Has 1 images] 
+P168:  TODO 4.2
+P169: [Has 1 images] 
+P172:  TODO 4.3
+P173: [Has 1 images] 
+P176:  TODO 4.4
+P178: [Has 1 images] 
+P182:  F5 – Movie (nhánh `feature/f5-movies`)
+P183:  TODO 5.1
+P184: [Has 1 images] 
+P187:  TODO 5.2
+P188: [Has 1 images] 
+P191:  TODO 5.3
+P192: [Has 1 images] 
+P194:  TODO 5.4
+P195: [Has 1 images] 
+P198:  F6 – Showtime (nhánh `feature/f6-showtimes`)
+P199:  TODO 6.1
+P201: [Has 1 images] 
+P203:  TODO 6.2
+P204: [Has 1 images] 
+P207:  TODO 6.3
+P208: [Has 1 images] 
+P210:  TODO 6.4
+P211: [Has 1 images] 
+P213:  TODO 6.5
+P214: [Has 1 images] 
+P217:  F7 – Create booking (nhánh `feature/f7-create-booking`)
+P218:  TODO 7.1
+P219: [Has 1 images] 
+P222:  TODO 7.2
+P223: [Has 1 images] 
+P225:  TODO 7.3
+P226: [Has 1 images] 
+P227: [Has 1 images] 
+P228:  TODO 7.4
+P229: [Has 1 images] 
+P231:  TODO 7.5
+P232: [Has 1 images] 
+P235:  TODO 7.6
+P236: [Has 1 images] 
+P238:  TODO 7.7
+P239: [Has 1 images] 
+P240: [Has 1 images] 
+P241:  F8 – History & cancel (nhánh `feature/f8-history-cancel`)
+P242:  TODO 8.1
+P243: [Has 1 images] 
+P246:  TODO 8.2
+P247: [Has 1 images] 
+P249:  TODO 8.3
+P250: [Has 1 images] 
+P252:  TODO 8.4
+P253: [Has 1 images] 
+P256:  F8 – History & cancel (nhánh `feature/f8-history-cancel`)
+P257:  TODO 9.1
+P258: [Has 1 images] 
+P261:  TODO 9.2
+P262: [Has 1 images] 
+P264:  TODO 9.3
+P265: [Has 1 images] 
+P268:  F10 – API Gateway (nhánh `feature/f10-gateway`)
+P269:  TODO 10.1
+P270: [Has 1 images] 
+P272:  TODO 10.2
+P273: [Has 1 images] 
+P275:  TODO 10.3
+P276: [Has 1 images] 
+P278:  TODO 10.4
+P279: [Has 1 images] 
+P281:  F11 – Postman & nộp bài (nhánh `feature/f11-postman`)
+P282:  TODO 11.1
+P283: [Has 1 images] 
+P284:  TODO 11.2
+P285: [Has 1 images] 
+P287:  TODO 11.3
+P288: [Has 1 images] 

@@ -1,0 +1,142 @@
+0: Assignment 1 MSS301 – Cinema Ticket Booking System using API Gateway
+1: Created by: traltb@fe.edu.vn
+2: Link github:
+3: https://github.com/ducsucute2005/MSS301_FA26_DE190685_SuLD.git
+4: Mục lục
+5: F0 – Hạ tầng và khởi tạo project3
+6: 1.1.TODO 0.1 Tạo thư mục gốc3
+7: 1.2.TODO 0.2 mysql/init.sql tạo 3 database cinema_customer, cinema_movie, cinema_booking3
+8: 1.3.TODO 0.34
+9: 1.4.TODO 0.45
+10: 1.5.TODO 0.56
+11: 1.6.TODO 0.67
+12: 1.7.TODO 1.17
+13: 1.8.TODO 1.28
+14: 1.9.TODO 1.310
+15: 1.10.TODO 1.411
+16: 1.11.TODO 1.511
+17: 2.0.F2 – Customer: register & profile (nhánh `feature/f2-customer-profile`)13
+18: 2.1.TODO 2.113
+19: 2.2.TODO 2.214
+20: 2.3.TODO 2.315
+21: 2.4.TODO 2.416
+22: 2.5.TODO 2.517
+23: 2.6.TODO 2.617
+24: 3.0.F3 – Admin: manage customers (nhánh `feature/f3-admin-customers`)18
+25: 3.1.TODO 3.118
+26: 3.2.TODO 3.219
+27: 3.3.TODO 3.319
+28: 4.0.F4 – Genre & Room (nhánh `feature/f4-genre-room`)20
+29: 4.1.TODO 4.120
+30: 4.2.TODO 4.221
+31: 4.3.TODO 4.322
+32: 4.4.TODO 4.422
+33: 5.0.F5 – Movie (nhánh `feature/f5-movies`)24
+34: 5.1.TODO 5.124
+35: 5.2.TODO 5.224
+36: 5.3.TODO 5.325
+37: 5.4.TODO 5.426
+38: 6.0.F6 – Showtime (nhánh `feature/f6-showtimes`)26
+39: 6.1.TODO 6.126
+40: 6.2.TODO 6.227
+41: 6.3.TODO 6.328
+42: 6.4.TODO 6.429
+43: 6.5.TODO 6.529
+44: 7.0.F7 – Create booking (nhánh `feature/f7-create-booking`)30
+45: 7.1.TODO 7.130
+46: 7.2.TODO 7.231
+47: 7.3.TODO 7.332
+48: 7.4.TODO 7.433
+49: 7.5.TODO 7.534
+50: 7.6.TODO 7.635
+51: 7.7.TODO 7.736
+52: 8.0.F8 – History & cancel (nhánh `feature/f8-history-cancel`)37
+53: 8.1.TODO 8.137
+54: 8.2.TODO 8.238
+55: 8.3.TODO 8.338
+56: 8.4.TODO 8.439
+57: 9.0.F8 – History & cancel (nhánh `feature/f8-history-cancel`)40
+58: 9.1.TODO 9.140
+59: 9.2.TODO 9.241
+60: 9.3.TODO 9.341
+61: 10.0.F10 – API Gateway (nhánh `feature/f10-gateway`)42
+62: 10.1.TODO 10.142
+63: 10.2.TODO 10.243
+64: 10.3.TODO 10.344
+65: 10.4.TODO 10.445
+66: 11.0.F11 – Postman & nộp bài (nhánh `feature/f11-postman`)45
+67: 11.1.TODO 11.145
+68: 11.2.TODO 11.246
+69: 11.3.TODO 11.346
+70: F0 – Hạ tầng và khởi tạo project
+71: TODO 0.1 Tạo thư mục gốc
+72: Chụp hình kết quả: cấu trúc project/ kết quả chạy / output terminal 
+73: Commit: chore(infra): add docker compose for sql server, mongodb and mysql`
+74: (Coi ở mục 9.4 Bảng commit trong file Assignment1_Guide.md)
+75: TODO 0.2 mysql/init.sql tạo 3 database cinema_customer, cinema_movie, cinema_booking
+76: Chụp hình kết quả: cấu trúc project/ kết quả chạy / output terminal 
+77: Commit: chore(infra): add docker compose for sql server, mongodb and mysql`
+78: (Coi ở mục 9.4 Bảng commit trong file Assignment1_Guide.md)
+79: TODO 0.3
+80: TODO 0.4
+81: TODO 0.5
+82: TODO 0.6
+83: TODO 1.1
+84: TODO 1.2
+85: TODO 1.3
+86: TODO 1.4
+87: TODO 1.5
+88: Mỗi mục sẽ gồm kết quả chạy, commit message
+89: F2 – Customer: register & profile (nhánh `feature/f2-customer-profile`)
+90: TODO 2.1 
+91: TODO 2.2
+92: TODO 2.3
+93: TODO 2.4
+94: TODO 2.5
+95: TODO 2.6
+96: F3 – Admin: manage customers (nhánh `feature/f3-admin-customers`)
+97: TODO 3.1
+98: TODO 3.2
+99: TODO 3.3
+100: F4 – Genre & Room (nhánh `feature/f4-genre-room`)
+101: TODO 4.1
+102: TODO 4.2
+103: TODO 4.3
+104: TODO 4.4
+105: F5 – Movie (nhánh `feature/f5-movies`)
+106: TODO 5.1
+107: TODO 5.2
+108: TODO 5.3
+109: TODO 5.4
+110: F6 – Showtime (nhánh `feature/f6-showtimes`)
+111: TODO 6.1
+112: TODO 6.2
+113: TODO 6.3
+114: TODO 6.4
+115: TODO 6.5
+116: F7 – Create booking (nhánh `feature/f7-create-booking`)
+117: TODO 7.1
+118: TODO 7.2
+119: TODO 7.3
+120: TODO 7.4
+121: TODO 7.5
+122: TODO 7.6
+123: TODO 7.7
+124: F8 – History & cancel (nhánh `feature/f8-history-cancel`)
+125: TODO 8.1
+126: TODO 8.2
+127: TODO 8.3
+128: TODO 8.4
+129: F8 – History & cancel (nhánh `feature/f8-history-cancel`)
+130: TODO 9.1
+131: TODO 9.2
+132: TODO 9.3
+133: F10 – API Gateway (nhánh `feature/f10-gateway`)
+134: TODO 10.1
+135: TODO 10.2
+136: TODO 10.3
+137: TODO 10.4
+138: F11 – Postman & nộp bài (nhánh `feature/f11-postman`)
+139: TODO 11.1
+140: TODO 11.2
+141: TODO 11.3
